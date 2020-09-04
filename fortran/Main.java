@@ -18,22 +18,27 @@ public class Main {
     private static final String FILES_PATH = "C:\\Users\\user\\Desktop\\Senior\\Senior Project\\Fortran_Codes";
     private static final String Process_Name = "Recursive_Relation_Com2";
 
+
     public static void main(String[] args) throws Exception {
-        String[] radiuses = new String[]{"0.35", "0.35", "0.35", "0.35"};
+        String[] radiuses = new String[]{"0.37", "0.37", "0.37", "0.37"};
         String[] distances = new String[]{"1", "1", "1"};
         String[] epsilons = new String[]{"11.7", "11.7", "11.7", "11.7"};
-
         compareOutputs("C:/Users/HP/Desktop/Dat1.dat","C:/Users/HP/Desktop/Dat1.dat");
         
         
         //runCalculation(radiuses, epsilons, distances);
-//        runCalculation("4", "32");
+        //minbeta maxbeta betastep minalpha maxalpha alphastep delta minfreq maxfreq freqdelta
+        String[] iterationData = new String[]{"0.01", "0.09", "0.0001", "0.1", "0.3", "0.0005",
+                "0.002d0", "0.25", "0.288", "0.0001"};
+        String fileName = "Dat3.dat";
+        runCalculation(radiuses, epsilons, distances, iterationData, fileName);
+        //        runCalculation("4", "32");
     }
 
-    private static void runCalculation(String[] radiuses, String[] epsilons, String[] distances) {
+    private static void runCalculation(String[] radiuses, String[] epsilons, String[] distances, String[] iterationData, String fileName) {
         System.out.println("AAA");
         try {
-            Process p = Runtime.getRuntime().exec(getCommand(radiuses, epsilons, distances));
+            Process p = Runtime.getRuntime().exec(getCommand(radiuses, epsilons, distances, iterationData, fileName));
             p.waitFor(3, TimeUnit.SECONDS);
             System.out.println("BBB");
 
@@ -46,7 +51,7 @@ public class Main {
         }
     }
 
-    private static String getCommand(String[] radiuses, String[] epsilons, String[] distances) {
+    private static String getCommand(String[] radiuses, String[] epsilons, String[] distances, String[] iterationData, String fileName) {
         System.out.println("FFF");
         StringBuilder builder = new StringBuilder();
         builder.append(FORTRAN_CMD_PATH);
@@ -77,6 +82,33 @@ public class Main {
         builder.append(epsilons[2]);
         builder.append(" ");
         builder.append(epsilons[3]);
+
+        builder.append(" ");
+        builder.append(iterationData[0]);
+        builder.append(" ");
+        builder.append(iterationData[1]);
+        builder.append(" ");
+        builder.append(iterationData[2]);
+        builder.append(" ");
+        builder.append(iterationData[3]);
+        builder.append(" ");
+        builder.append(iterationData[4]);
+        builder.append(" ");
+        builder.append(iterationData[5]);
+        builder.append(" ");
+        builder.append(iterationData[6]);
+        builder.append(" ");
+        builder.append(iterationData[7]);
+        builder.append(" ");
+        builder.append(iterationData[8]);
+        builder.append(" ");
+        builder.append(iterationData[9]);
+        builder.append(" ");
+
+
+        builder.append(fileName);
+
+
         builder.append("\"");
         System.out.println("fffggg");
         System.out.println(builder.toString());
@@ -106,7 +138,7 @@ public class Main {
     }
     
     private static Entry getEntryFromOneRowOfOutput(String row) {
-    	
+        String[] parameters = parseRow(row);
     	System.out.println(row);
     	System.out.println(parameters.length);
     	return new Entry(parameters[2], parameters[11], parameters[9]);
@@ -121,6 +153,7 @@ public class Main {
     			
     		}
     	}
+    	return array;
     }
     
     static class Entry{
