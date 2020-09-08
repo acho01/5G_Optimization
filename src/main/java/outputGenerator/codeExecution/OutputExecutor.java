@@ -1,4 +1,4 @@
-package outputGenerator.command.codeExecution;
+package outputGenerator.codeExecution;
 
 import outputGenerator.command.ParameterData;
 

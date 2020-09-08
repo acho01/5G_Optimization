@@ -1,4 +1,4 @@
-package outputGenerator.command.parser;
+package outputGenerator.parser;
 
 import java.io.IOException;
 import java.nio.file.Files;

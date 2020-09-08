@@ -1,4 +1,4 @@
-package outputGenerator.command.parser;
+package outputGenerator.parser;
 
 public class Entry{
     	final Double frequency;

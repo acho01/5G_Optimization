@@ -1,4 +1,4 @@
-package outputGenerator.command.codeExecution;
+package outputGenerator.codeExecution;
 
 import org.math.plot.Plot2DPanel;
 import org.math.plot.plots.Plot;
@@ -6,8 +6,8 @@ import org.math.plot.plots.Plot;
 import javax.swing.*;
 import outputGenerator.command.CommandGenerator;
 import outputGenerator.command.ParameterData;
-import outputGenerator.command.parser.Entry;
-import outputGenerator.command.parser.FileParser;
+import outputGenerator.parser.Entry;
+import outputGenerator.parser.FileParser;
 import utils.ApplicationUtilities;
 import utils.SystemConstants;
 
